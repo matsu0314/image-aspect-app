@@ -42,7 +42,7 @@ export const useCalc = () => {
     if (Number(targetNumber) > 100) {
       precentCalc = `${targetNumber} * ${calcValue}`;
     } else {
-      precentCalc = `${targetNumber} / ${calcValue} * 100`;
+      precentCalc = `${calcValue} / ${targetNumber}`;
     }
     let formula = new Function('return ' + precentCalc);
     return Math.floor(formula()).toString();
