@@ -3,12 +3,13 @@ import { shapeType, returnStateType, scaleKeyWord } from '../types';
 export const useCalc = () => {
   //　全角を半角に変換
   const replaceFullToHalf = (str: string) => {
-    return String(str).replace(/[Ａ-Ｚａ-ｚ０-９＋＊／]/g, function (s) {
-      return String.fromCharCode(s.charCodeAt(0) - 0xfee0).replace(
-        /[-－﹣−‐⁃‑‒–—﹘―⎯⏤ーｰ─━]/g,
-        '-'
-      );
-    });
+    let hankaku = function (str: string) {
+      return String.fromCharCode(str.charCodeAt(0) - 0xfee0);
+    };
+    str = str.replace(/[Ａ-Ｚａ-ｚ０-９＋＊／]/g, hankaku);
+    str = str.replace(/[-－﹣−‐⁃‑‒–—﹘―⎯⏤ーｰ─━]/g, '-');
+    str = str.replace(/[ts　]/g, '');
+    return str;
   };
   //　比率を維持してリサイズ
   const calcRatio = (
@@ -38,13 +39,13 @@ export const useCalc = () => {
     let calcValue =
       type === 'WIDTH' ? shapeState.scale.width : shapeState.scale.height;
     let targetNumber = actionScale.slice(0, -1);
-    let precentCalc = '';
+    let inputValue = '';
     if (Number(targetNumber) > 100) {
-      precentCalc = `${targetNumber} * ${calcValue}`;
+      inputValue = `${targetNumber} * ${calcValue}`;
     } else {
-      precentCalc = `${calcValue} / ${targetNumber}`;
+      inputValue = `${calcValue} / ${targetNumber}`;
     }
-    let formula = new Function('return ' + precentCalc);
+    let formula = new Function('return ' + inputValue);
     return Math.floor(formula()).toString();
   };
 
@@ -67,6 +68,7 @@ export const useCalc = () => {
         resultScale = calcPercent(shapeState, actionScale, type);
         //それ以外
       } else {
+        console.log(calcNumber);
         let formula = new Function('return ' + calcNumber);
         resultScale = formula().toString();
       }
