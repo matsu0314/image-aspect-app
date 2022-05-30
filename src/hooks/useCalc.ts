@@ -38,13 +38,11 @@ export const useCalc = () => {
   ) => {
     let calcValue =
       type === 'WIDTH' ? shapeState.scale.width : shapeState.scale.height;
-    let targetNumber = actionScale.slice(0, -1);
+    let percentNumber = actionScale.slice(0, -1);
     let inputValue = '';
-    if (Number(targetNumber) > 100) {
-      inputValue = `${targetNumber} * ${calcValue}`;
-    } else {
-      inputValue = `${calcValue} / ${targetNumber}`;
-    }
+
+    inputValue = `(${percentNumber} / 100) * ${calcValue}`;
+
     let formula = new Function('return ' + inputValue);
     return Math.floor(formula()).toString();
   };
@@ -68,7 +66,6 @@ export const useCalc = () => {
         resultScale = calcPercent(shapeState, actionScale, type);
         //それ以外
       } else {
-        console.log(calcNumber);
         let formula = new Function('return ' + calcNumber);
         resultScale = formula().toString();
       }
