@@ -8,7 +8,7 @@ export const Footer: FC = () => {
         bottom: 0,
         left: 0,
         right: 0,
-        height: '56px',
+        height: '50px',
         marginTop: '20px',
       }}
     >

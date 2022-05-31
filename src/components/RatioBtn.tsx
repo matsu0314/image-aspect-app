@@ -11,33 +11,28 @@ export const RatioBtn: FC<ratioBtnType> = (props) => {
   const { onClickRatio, ratioFlag } = props;
   return (
     <>
-      <button
-        type="button"
-        value="check"
-        onClick={onClickRatio}
-        style={{ boxShadow: 'none' }}
-      >
-        {ratioFlag ? (
-          <IconButton
-            aria-label="Lock"
-            bg="transparent"
-            style={{ outline: 'none' }}
-            _hover={{ background: 'transparent' }}
-            _active={{ background: 'transparent' }}
-            _focus={{ boxShadow: 'none' }}
-            icon={<LockIcon />}
-          />
-        ) : (
-          <IconButton
-            aria-label="Lock"
-            bg="transparent"
-            _hover={{ background: 'transparent' }}
-            _active={{ background: 'transparent' }}
-            _focus={{ boxShadow: 'none' }}
-            icon={<UnlockIcon />}
-          />
-        )}
-      </button>
+      {ratioFlag ? (
+        <IconButton
+          onClick={onClickRatio}
+          aria-label="Lock"
+          bg="transparent"
+          style={{ outline: 'none' }}
+          _hover={{ background: 'transparent' }}
+          _active={{ background: 'transparent' }}
+          _focus={{ boxShadow: 'none' }}
+          icon={<LockIcon />}
+        />
+      ) : (
+        <IconButton
+          onClick={onClickRatio}
+          aria-label="Unlock"
+          bg="transparent"
+          _hover={{ background: 'transparent' }}
+          _active={{ background: 'transparent' }}
+          _focus={{ boxShadow: 'none' }}
+          icon={<UnlockIcon />}
+        />
+      )}
     </>
   );
 };

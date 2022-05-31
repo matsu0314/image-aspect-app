@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
-import { Box, Flex, Spacer, Image, textDecoration } from '@chakra-ui/react';
+import { GuideModal } from '../components/GuideModal';
+import { Box, Flex, Spacer, Image } from '@chakra-ui/react';
 import { NavLink } from 'react-router-dom';
 import logoImg from '../assets/images/logo.png';
 
@@ -13,17 +14,7 @@ export const Header: FC = () => {
       </Box>
       <Spacer />
       <Box>
-        <NavLink
-          to="/guide"
-          style={({ isActive }) => {
-            return {
-              fontWeight: isActive ? 700 : 400,
-              textDecoration: isActive ? 'none' : 'underline',
-            };
-          }}
-        >
-          使い方
-        </NavLink>
+        <GuideModal />
       </Box>
     </Flex>
   );

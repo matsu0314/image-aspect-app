@@ -13,6 +13,7 @@ export const ResetBtn: FC<resetBtnType> = (props) => {
       <Button
         colorScheme="gray"
         variant="ghost"
+        _focus={{ boxShadow: 'none' }}
         size="xs"
         value="reset"
         onClick={onClickReset}
