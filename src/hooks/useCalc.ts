@@ -21,7 +21,7 @@ export const useCalc = () => {
     let calcValue =
       type === 'WIDTH' ? shapeState.scale.width : shapeState.scale.height;
 
-    if (type == 'WIDTH') {
+    if (type === 'WIDTH') {
       const ratioWidth = Number(objScale.width) / Number(calcValue);
       resultRatio = Math.floor(Number(objScale.height) * ratioWidth);
     } else if (type == 'HEIGHT') {
