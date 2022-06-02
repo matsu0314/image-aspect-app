@@ -6,7 +6,7 @@ export const useCalc = () => {
     let hankaku = function (str: string) {
       return String.fromCharCode(str.charCodeAt(0) - 0xfee0);
     };
-    str = str.replace(/[Ａ-Ｚａ-ｚ０-９＋＊／]/g, hankaku);
+    str = str.replace(/[Ａ-Ｚａ-ｚ０-９＋＊／％]/g, hankaku);
     str = str.replace(/[-－﹣−‐⁃‑‒–—﹘―⎯⏤ーｰ─━]/g, '-');
     str = str.replace(/[ts　]/g, '');
     return str;
@@ -36,13 +36,12 @@ export const useCalc = () => {
     actionScale: string,
     type: scaleKeyWord
   ) => {
+    // ％入力前の値（WIDTHかHEIGHT）
     let calcValue =
       type === 'WIDTH' ? shapeState.scale.width : shapeState.scale.height;
+    // %を削除して数字だけ取得
     let percentNumber = actionScale.slice(0, -1);
-    let inputValue = '';
-
-    inputValue = `(${percentNumber} / 100) * ${calcValue}`;
-
+    let inputValue = `(${percentNumber} / 100) * ${calcValue}`;
     let formula = new Function('return ' + inputValue);
     return Math.floor(formula()).toString();
   };
