@@ -1,5 +1,7 @@
 import React from 'react';
 import guideImg1 from '../assets/images/guide1.gif';
+import guideImg2 from '../assets/images/guide2.png';
+
 import { LockIcon } from '@chakra-ui/icons';
 import {
   Modal,
@@ -41,11 +43,14 @@ export const GuideModal = () => {
             <UnorderedList mt={3}>
               <ListItem mb={4}>
                 <Text mb={2}>
-                  値を入力値すると、オブジェクトの比率が自動で計算されます。
+                  入力した値でオブジェクトの比率が計算されます。
                   <br />
                   計算式を入力すれば計算結果が反映されます。
                 </Text>
                 <img src={guideImg1} alt="ガイド１" />
+                <br />
+                パーセント記号（％）を入力すれば値の割合が反映されます。
+                <img src={guideImg2} alt="ガイド２" />
               </ListItem>
               <ListItem>
                 <Text mb={2}>
