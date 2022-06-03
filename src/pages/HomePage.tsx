@@ -65,18 +65,21 @@ export const HomePage: FC = () => {
     // heightのフォーム値を更新
     setInputHeight(resultValue.height);
   };
-
+  // フォームの入力値が変更された時（Width）
   const onChangeWidth = (e: React.ChangeEvent<HTMLInputElement>) => {
     const target = e.target;
     setInputWidth(target.value);
   };
+  // フォームの入力値が変更された時（Height）
   const onChangeHeight = (e: React.ChangeEvent<HTMLInputElement>) => {
     const target = e.target;
     setInputHeight(target.value);
   };
+  // 縦横比をクリックした時
   const onClickRatio = () => {
     setRatioFlag(!ratioFlag);
   };
+  // リセットをクリックした時
   const onClickReset = () => {
     dispatch({
       type: 'RESET',
