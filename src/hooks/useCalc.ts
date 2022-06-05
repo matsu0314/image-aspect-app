@@ -62,7 +62,7 @@ export const useCalc = () => {
       let resultScale = '';
       // 値に%が含まれていたら
       if (calcNumber.indexOf('%') !== -1) {
-        resultScale = calcPercent(shapeState, actionScale, type);
+        resultScale = calcPercent(shapeState, calcNumber, type);
         //それ以外
       } else {
         let formula = new Function('return ' + calcNumber);
@@ -81,6 +81,7 @@ export const useCalc = () => {
         };
       }
     } catch (error) {
+      console.log(error);
       returnState = {
         width: shapeState.scale.width,
         height: shapeState.scale.height,
