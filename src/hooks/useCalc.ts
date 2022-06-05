@@ -1,6 +1,9 @@
 import { shapeType, returnStateType, scaleKeyWord } from '../types';
+import { useStringCalc } from './useStringCalc';
 
 export const useCalc = () => {
+  const { stringCalc } = useStringCalc();
+
   //　全角を半角に変換
   const replaceFullToHalf = (str: string) => {
     let hankaku = function (str: string) {
@@ -11,6 +14,7 @@ export const useCalc = () => {
     str = str.replace(/[ts　]/g, '');
     return str;
   };
+
   //　比率を維持してリサイズ
   const calcRatio = (
     shapeState: shapeType,
@@ -41,9 +45,8 @@ export const useCalc = () => {
       type === 'WIDTH' ? shapeState.scale.width : shapeState.scale.height;
     // %を削除して数字だけ取得
     let percentNumber = actionScale.slice(0, -1);
-    let inputValue = `(${percentNumber} / 100) * ${calcValue}`;
-    let formula = new Function('return ' + inputValue);
-    return Math.floor(formula()).toString();
+    let formula = (Number(percentNumber) / 100) * Number(calcValue);
+    return Math.floor(formula).toString();
   };
 
   // 値として計算を入力した時の計算結果
@@ -65,8 +68,8 @@ export const useCalc = () => {
         resultScale = calcPercent(shapeState, calcNumber, type);
         //それ以外
       } else {
-        let formula = new Function('return ' + calcNumber);
-        resultScale = formula().toString();
+        let formula = stringCalc(calcNumber);
+        resultScale = String(formula);
       }
 
       if (type === 'WIDTH') {
@@ -91,5 +94,5 @@ export const useCalc = () => {
     }
   };
 
-  return { calcRatio, calcPercent, calcFunc };
+  return { calcRatio, calcFunc };
 };
